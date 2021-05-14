@@ -1,0 +1,114 @@
+### Figure 3: Characteristics of biallelic true and false positive indels called by all pipelines ###
+
+library(ggplot2)
+library(reshape2)
+
+df_FP<-read.table('/mnt/microbio/HOMES/steveb/test_suite/characteristics_of_FP_indels_using_real_data.tsv',sep='\t',header=T)
+df_TP<-read.table('/mnt/microbio/HOMES/steveb/test_suite/characteristics_of_TP_indels_using_real_data.tsv',sep='\t',header=T)
+
+len_ref_FP<-nchar(as.character(df_FP$Reference.base))
+len_var_FP<-nchar(as.character(df_FP$Variant.base))
+
+# (a) variant call quality
+png('/mnt/microbio/HOMES/steveb/test_suite/Fig3A.png')
+false<-df_FP$Variant.call.quality
+true<-df_TP$Variant.call.quality
+max.len = max(length(false), length(true))
+false = c(false, rep(NA, max.len - length(false))) # see https://stackoverflow.com/questions/7196450/create-a-data-frame-of-unequal-lengths
+true = c(true, rep(NA, max.len - length(true)))
+df<-data.frame(false,true)
+data<-melt(df)
+ggplot(data,aes(x=value, fill=variable)) + geom_density(alpha=0.25) + xlab('Variant call quality') + ylab('Density') + scale_x_continuous(limits=c(0,500)) + theme_bw() + geom_vline(aes(xintercept=20),color="red", size=1)
+dev.off()
+
+# (b) average quality of variant-supporting reads
+png('/mnt/microbio/HOMES/steveb/test_suite/Fig3B.png')
+false<-df_FP$Average.quality.of.variant.supporting.reads
+true<-df_TP$Average.quality.of.variant.supporting.reads
+max.len = max(length(false), length(true))
+false = c(false, rep(NA, max.len - length(false)))
+true = c(true, rep(NA, max.len - length(true)))
+df<-data.frame(false,true)
+data<-melt(df)
+ggplot(data,aes(x=value, fill=variable)) + geom_density(alpha=0.25) + xlab('Average quality of variant-supporting reads') + ylab('Density') + scale_x_continuous(limits=c(0,50)) + theme_bw()
+dev.off()
+
+# (c) variant allele frequency
+png('/mnt/microbio/HOMES/steveb/test_suite/Fig3C.png')
+false<-df_FP$Proportion.of.reads.supporting.the.variant.allele
+true<-df_TP$Proportion.of.reads.supporting.the.variant.allele
+max.len = max(length(false), length(true))
+false = c(false, rep(NA, max.len - length(false)))
+true = c(true, rep(NA, max.len - length(true)))
+df<-data.frame(false,true)
+data<-melt(df)
+ggplot(data,aes(x=value, fill=variable)) + geom_density(alpha=0.25) + xlab('Variant allele frequency') + ylab('Density') + scale_x_continuous(limits=c(0.9,1)) + scale_y_continuous(limits=c(0,50)) + theme_bw() + geom_vline(aes(xintercept=0.95),color="red", size=1)
+dev.off()
+
+# (d) read depth
+png('/mnt/microbio/HOMES/steveb/test_suite/Fig3D.png')
+false<-df_FP$Read.depth..no..of.reads.mapping.to.this.position.
+true<-df_TP$Read.depth..no..of.reads.mapping.to.this.position.
+max.len = max(length(false), length(true))
+false = c(false, rep(NA, max.len - length(false)))
+true = c(true, rep(NA, max.len - length(true)))
+df<-data.frame(false,true)
+data<-melt(df)
+ggplot(data,aes(x=value, fill=variable)) + geom_density(alpha=0.25) + xlab('Read depth') + ylab('Density') + scale_x_continuous(limits=c(0,100)) + theme_bw() + geom_vline(aes(xintercept=10),color="red", size=1)
+dev.off()
+
+# (e) no. of reads supporting variant allele
+png('/mnt/microbio/HOMES/steveb/test_suite/Fig3E.png')
+false<-df_FP$No..of.reads.supporting.variant.allele
+true<-df_TP$No..of.reads.supporting.variant.allele
+max.len = max(length(false), length(true))
+false = c(false, rep(NA, max.len - length(false)))
+true = c(true, rep(NA, max.len - length(true)))
+df<-data.frame(false,true)
+data<-melt(df)
+ggplot(data,aes(x=value, fill=variable)) + geom_density(alpha=0.25) + xlab('No. of reads supporting variant allele') + ylab('Density') + scale_x_continuous(limits=c(0,100)) + theme_bw()
+dev.off()
+
+# (f) distance to nearest SNP
+png('/mnt/microbio/HOMES/steveb/test_suite/Fig3F.png')
+false<-df_FP$Distance.to.nearest.SNP..bp.
+true<-df_TP$Distance.to.nearest.SNP..bp.
+max.len = max(length(false), length(true))
+false = c(false, rep(NA, max.len - length(false)))
+true = c(true, rep(NA, max.len - length(true)))
+df<-data.frame(false,true)
+data<-melt(df)
+ggplot(data,aes(x=value, fill=variable)) + geom_density(alpha=0.25) + xlab('Distance to nearest SNP (bp)') + ylab('Density') + scale_x_continuous(limits=c(0,100)) + theme_bw() + geom_vline(aes(xintercept=3),color="red", size=1)
+dev.off()
+
+# (g) distance to nearest indel
+png('/mnt/microbio/HOMES/steveb/test_suite/Fig3G.png')
+false<-df_FP$Distance.to.nearest.indel..bp.
+true<-df_TP$Distance.to.nearest.indel..bp.
+max.len = max(length(false), length(true))
+false = c(false, rep(NA, max.len - length(false)))
+true = c(true, rep(NA, max.len - length(true)))
+df<-data.frame(false,true)
+data<-melt(df)
+ggplot(data,aes(x=value, fill=variable)) + geom_density(alpha=0.25) + xlab('Distance to nearest indel (bp)') + ylab('Density') + scale_x_continuous(limits=c(0,100)) + theme_bw() + geom_vline(aes(xintercept=10),color="red", size=1)
+dev.off()
+
+# (h) % of reads mapping to the least-covered strand
+png('/mnt/microbio/HOMES/steveb/test_suite/Fig3H.png')
+fwd<-df_FP$No..of.reads.mapping.to.forward.strand
+rev<-df_FP$No..of.reads.mapping.to.reverse.strand
+min<-pmin(fwd,rev)
+max<-pmax(fwd,rev)
+false<-((min/(min+max))*100)
+fwd<-df_TP$No..of.reads.mapping.to.forward.strand
+rev<-df_TP$No..of.reads.mapping.to.reverse.strand
+min<-pmin(fwd,rev)
+max<-pmax(fwd,rev)
+true<-((min/(min+max))*100)
+max.len = max(length(false), length(true))
+false = c(false, rep(NA, max.len - length(false)))
+true = c(true, rep(NA, max.len - length(true)))
+df<-data.frame(false,true)
+data<-melt(df)
+ggplot(data,aes(x=value, fill=variable)) + geom_density(alpha=0.25) + xlab('% of reads mapping to the least-covered strand') + ylab('Density') + theme_bw() + geom_vline(aes(xintercept=5),color="red", size=1)
+dev.off()
