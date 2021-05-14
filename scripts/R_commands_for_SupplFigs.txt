@@ -1,0 +1,89 @@
+### [SUPPLEMENTARY FIGURE 1] SNPs: create a boxplot of the distribution of precision for each pipeline, after aligning to real strains, coloured by caller
+
+library(ggplot2)
+
+df<-read.table('C:/Users/sbush/Desktop/test_suite/summary_of_pipeline_performance.tsv',sep='\t',header=T)
+
+precision<-df$Precision..SNPs.
+aligner<-df$Aligner
+caller<-df$Caller
+aligner_and_caller<-df$Pipeline
+
+fig<-ggplot(df, aes(x = aligner_and_caller, y = precision)) + geom_boxplot() + theme_bw() + scale_x_discrete(name = "Aligner/caller") + scale_y_continuous(name = "Precision") + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+fig<-ggplot(df, aes(x = reorder(aligner_and_caller,precision,FUN=median), y = precision, fill=reorder(caller,precision,FUN=median))) + geom_boxplot() + theme_bw() + scale_x_discrete(name = "Aligner/caller") + scale_y_continuous(name = "Precision") + theme(axis.text.x = element_text(size=8, angle = 90, hjust = 1)) # for reordering, see https://groups.google.com/forum/#!topic/ggplot2/8N0ofttOdcw
+caller_colours<-c("red","pink","deepskyblue","gold","darkmagenta","blue","violet","orange","darkblue","green","grey","yellow","purple","brown","white","black","chartreuse")
+names(caller_colours) <- levels(df$Caller)
+colour_scale <- scale_fill_manual(name = "Caller",values = caller_colours, breaks=levels(unique(df$Caller)))
+fig<-fig + colour_scale + geom_hline(yintercept=0.95,color='black',size=1)
+
+### [SUPPLEMENTARY FIGURE 2] SNPs: create a boxplot of the distribution of recall for each pipeline, after aligning to real strains, coloured by caller
+
+library(ggplot2)
+
+df<-read.table('C:/Users/sbush/Desktop/test_suite/summary_of_pipeline_performance.tsv',sep='\t',header=T)
+
+recall<-df$Recall..SNPs.
+aligner<-df$Aligner
+caller<-df$Caller
+aligner_and_caller<-df$Pipeline
+
+fig<-ggplot(df, aes(x = aligner_and_caller, y = recall)) + geom_boxplot() + theme_bw() + scale_x_discrete(name = "Aligner/caller") + scale_y_continuous(name = "Recall") + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+fig<-ggplot(df, aes(x = reorder(aligner_and_caller,recall,FUN=median), y = recall, fill=reorder(caller,recall,FUN=median))) + geom_boxplot() + theme_bw() + scale_x_discrete(name = "Aligner/caller") + scale_y_continuous(name = "Recall") + theme(axis.text.x = element_text(size=8, angle = 90, hjust = 1)) # for reordering, see https://groups.google.com/forum/#!topic/ggplot2/8N0ofttOdcw
+caller_colours<-c("red","pink","deepskyblue","gold","darkmagenta","blue","violet","orange","darkblue","green","grey","yellow","purple","brown","white","black","chartreuse")
+names(caller_colours) <- levels(df$Caller)
+colour_scale <- scale_fill_manual(name = "Caller",values = caller_colours, breaks=levels(unique(df$Caller)))
+fig<-fig + colour_scale + geom_hline(yintercept=0.95,color='black',size=1)
+
+### [SUPPLEMENTARY FIGURE 4] Indels: create a boxplot of the distribution of F-scores for each pipeline, after aligning to real strains, coloured by caller
+
+library(ggplot2)
+
+df<-read.table('C:/Users/sbush/Desktop/test_suite/summary_of_pipeline_performance.tsv',sep='\t',header=T)
+
+f_score<-df$F.score..indels.
+aligner<-df$Aligner
+caller<-df$Caller
+aligner_and_caller<-df$Pipeline
+
+fig<-ggplot(df, aes(x = aligner_and_caller, y = f_score)) + geom_boxplot() + theme_bw() + scale_x_discrete(name = "Aligner/caller") + scale_y_continuous(name = "F-score") + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+fig<-ggplot(df, aes(x = reorder(aligner_and_caller,f_score,FUN=median), y = f_score, fill=reorder(caller,f_score,FUN=median))) + geom_boxplot() + theme_bw() + scale_x_discrete(name = "Aligner/caller") + scale_y_continuous(name = "F-score") + theme(axis.text.x = element_text(size=8, angle = 90, hjust = 1)) # for reordering, see https://groups.google.com/forum/#!topic/ggplot2/8N0ofttOdcw
+caller_colours<-c("red","pink","deepskyblue","gold","darkmagenta","blue","violet","orange","darkblue","green","grey","yellow","purple","brown","white","black","chartreuse")
+names(caller_colours) <- levels(df$Caller)
+colour_scale <- scale_fill_manual(name = "Caller",values = caller_colours, breaks=levels(unique(df$Caller)))
+fig<-fig + colour_scale + geom_hline(yintercept=0.8,color='black',size=1)
+
+### [SUPPLEMENTARY FIGURE 5] Indels: create a boxplot of the distribution of precision for each pipeline, after aligning to real strains, coloured by caller
+
+library(ggplot2)
+
+df<-read.table('C:/Users/sbush/Desktop/test_suite/summary_of_pipeline_performance.tsv',sep='\t',header=T)
+
+precision<-df$Precision..indels.
+aligner<-df$Aligner
+caller<-df$Caller
+aligner_and_caller<-df$Pipeline
+
+fig<-ggplot(df, aes(x = aligner_and_caller, y = precision)) + geom_boxplot() + theme_bw() + scale_x_discrete(name = "Aligner/caller") + scale_y_continuous(name = "Precision") + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+fig<-ggplot(df, aes(x = reorder(aligner_and_caller,precision,FUN=median), y = precision, fill=reorder(caller,precision,FUN=median))) + geom_boxplot() + theme_bw() + scale_x_discrete(name = "Aligner/caller") + scale_y_continuous(name = "Precision") + theme(axis.text.x = element_text(size=8, angle = 90, hjust = 1)) # for reordering, see https://groups.google.com/forum/#!topic/ggplot2/8N0ofttOdcw
+caller_colours<-c("red","pink","deepskyblue","gold","darkmagenta","blue","violet","orange","darkblue","green","grey","yellow","purple","brown","white","black","chartreuse")
+names(caller_colours) <- levels(df$Caller)
+colour_scale <- scale_fill_manual(name = "Caller",values = caller_colours, breaks=levels(unique(df$Caller)))
+fig<-fig + colour_scale + geom_hline(yintercept=0.8,color='black',size=1)
+
+### [SUPPLEMENTARY FIGURE 6] Indels: create a boxplot of the distribution of recall for each pipeline, after aligning to real strains, coloured by caller
+
+library(ggplot2)
+
+df<-read.table('C:/Users/sbush/Desktop/test_suite/summary_of_pipeline_performance.tsv',sep='\t',header=T)
+
+recall<-df$Recall..indels.
+aligner<-df$Aligner
+caller<-df$Caller
+aligner_and_caller<-df$Pipeline
+
+fig<-ggplot(df, aes(x = aligner_and_caller, y = recall)) + geom_boxplot() + theme_bw() + scale_x_discrete(name = "Aligner/caller") + scale_y_continuous(name = "Recall") + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+fig<-ggplot(df, aes(x = reorder(aligner_and_caller,recall,FUN=median), y = recall, fill=reorder(caller,recall,FUN=median))) + geom_boxplot() + theme_bw() + scale_x_discrete(name = "Aligner/caller") + scale_y_continuous(name = "Recall") + theme(axis.text.x = element_text(size=8, angle = 90, hjust = 1)) # for reordering, see https://groups.google.com/forum/#!topic/ggplot2/8N0ofttOdcw
+caller_colours<-c("red","pink","deepskyblue","gold","darkmagenta","blue","violet","orange","darkblue","green","grey","yellow","purple","brown","white","black","chartreuse")
+names(caller_colours) <- levels(df$Caller)
+colour_scale <- scale_fill_manual(name = "Caller",values = caller_colours, breaks=levels(unique(df$Caller)))
+fig<-fig + colour_scale + geom_hline(yintercept=0.8,color='black',size=1)
