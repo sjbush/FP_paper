@@ -1,6 +1,6 @@
 # FP_paper
 
-This repository contains the 6 benchmarking datasets used in the paper "Generalisable characteristics of false positive bacterial variant calls", plus the associated scripts used to (a) create them, (b) run variant calling pipelines against them, and (c) parse output of the same. R commands are also given for the paper's figures. Scripts should be considered "lab quality" rather than "developer quality."
+This repository contains the 6 benchmarking datasets used in the paper ["Generalisable characteristics of false positive bacterial variant calls"](https://doi.org/10.1099/mgen.0.000615), plus the associated scripts used to (a) create them, (b) run variant calling pipelines against them, and (c) parse output of the same. R commands are also given for the paper's figures. Scripts should be considered "lab quality" rather than "developer quality."
 
 Each benchmarking dataset comprises a triplet of files: a fasta, a VCF, and a BED. The associated fastqs are sourced from the [FDA-ARGOS reference collection](https://www.nature.com/articles/s41467-019-11306-6) and hosted on the SRA, as detailed below.
 
