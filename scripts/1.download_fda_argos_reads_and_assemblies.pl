@@ -43,9 +43,6 @@ if (!(-d($vt_dir)))    			 { $fatal++; print "error: cannot find $vt_dir\n";    
 if (!(-d($bwa_dir)))    		 { $fatal++; print "error: cannot find $bwa_dir\n";    			}
 if (!(-e($mash_path)))  		 { $fatal++; print "error: cannot find $mash_path\n";  			}
 if (!(-d($seqtk_dir)))    		 { $fatal++; print "error: cannot find $seqtk_dir\n";    		}
-if (!(-d($mauve_dir)))  		 { $fatal++; print "error: cannot find $mauve_dir\n";  			}
-if (!(-e($mauve_jar)))  		 { $fatal++; print "error: cannot find $mauve_jar\n";  			}
-if (!(-e($mauve_path)))  		 { $fatal++; print "error: cannot find $mauve_path\n";  		}
 if (!(-e($bgzip_path)))    		 { $fatal++; print "error: cannot find $bgzip_path\n";   		}
 if (!(-e($tabix_path)))    		 { $fatal++; print "error: cannot find $tabix_path\n";    		}
 if (!(-e($wgsim_path)))    		 { $fatal++; print "error: cannot find $wgsim_path\n";    		}
